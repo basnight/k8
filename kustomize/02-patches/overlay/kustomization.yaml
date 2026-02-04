@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../base
+
+patches:
+- path: add-annotation.yaml
+  target:
+   group: apps
+   version: v1
+   kind: Deployment
+   name: web-app
+
+- path: replicas.yaml
+
+############################################
+# Deprecated Approach, will be removed in v1
+############################################
+# patchesStrategicMerge:
+# - increase-memory.yaml
+
+# patchesJson6902:
+# - target:
+#     group: apps
+#     version: v1
+#     kind: Deployment
+#     name: web-app
+#   path: add-label.yaml

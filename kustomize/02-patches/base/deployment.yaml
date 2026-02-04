@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: web-app
+        image: nginx:1.19
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
