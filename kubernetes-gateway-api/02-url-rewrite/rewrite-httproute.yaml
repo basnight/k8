@@ -1,0 +1,23 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: http-filter-url-rewrite
+spec:
+  parentRefs:
+    - name: eg
+  hostnames:
+    - path.rewrite.example
+  rules:
+    - matches:
+      - path:
+          value: "/get"
+      filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /replace
+      backendRefs:
+      - name: backend
+        port: 3000
